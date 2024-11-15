@@ -70,6 +70,8 @@ library ModuleDeployer {
         internal
         returns (address)
     {
+        address expectedAddress = computeAddress(creationCode, salt);
+        if (isContract(expectedAddress)) return expectedAddress;
         VM.broadcast(deployerPrivateKey);
         return _deploy(creationCode, args, salt);
     }
@@ -78,6 +80,8 @@ library ModuleDeployer {
         internal
         returns (address)
     {
+        address expectedAddress = computeAddress(creationCode, salt);
+        if (isContract(expectedAddress)) return expectedAddress;
         VM.broadcast(deployerPrivateKey);
         return _deploy(creationCode, "", salt);
     }
